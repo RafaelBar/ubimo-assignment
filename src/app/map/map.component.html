@@ -1,6 +1,10 @@
-
-
-<div class="map-block">
-    oasdoaskdaskd;ads
-    <p>asdasdasdasdasd</p>
+<div class="map-parent-layer">
+    <div class="map-block">
+    <div class="map-ad" 
+    *ngFor="let ad of ads"
+     [ngStyle]="{'top': ad.coordinates.y, 'left': ad.coordinates.x}">
+        <span>{{ad.type}}</span>
+        {{ad.coordinates.x}}, {{ad.coordinates.y}}
+    </div>
+    </div>
 </div>

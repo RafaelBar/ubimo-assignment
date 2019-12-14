@@ -1,3 +1,10 @@
-<div *ngFor="let item of adList; let i = index">
-    {{i}} {{item.creative.name}}
+<app-logs-filter></app-logs-filter>
+<div class="col-md-12 col-xs-12" *ngFor="let item of adList.slice().reverse()">
+    <!-- <div class="col-md-2 col-xs-2 adtype">
+            <object *ngIf="item.type === 'IMAGE'; else videoType" type="image/svg+xml" data="../../images/icons/ic_movie_creation_black_24px.svg"></object>
+            <object #videoType type="image/svg+xml" data="../../images/icons/ic_insert_link_black_24px.svg"></object>
+        
+    </div> -->
+    <div class="col-md-4 col-xs-4 adName">{{item.creative.name}}</div>
+    
 </div>
