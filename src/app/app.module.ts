@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { LogsComponent } from './logs/logs.component';
 import { LogsFilterComponent } from './logs/logs-filter/logs-filter.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { LogsFilterComponent } from './logs/logs-filter/logs-filter.component';
     LogsFilterComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

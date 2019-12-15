@@ -1,5 +1,6 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { AdService } from '../ad.service';
+import { Component, OnInit } from '@angular/core';
+import { AdService, IAdEventWithTime } from '../ad.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-logs',
@@ -9,19 +10,14 @@ import { AdService } from '../ad.service';
 
 
 export class LogsComponent implements OnInit {
+  private title: string = "Ads List";
+  private adList: Observable<IAdEventWithTime[]>;
+  ads: IAdEventWithTime[] = [];
   
-  private adList = [];
-  constructor(private adService: AdService,
-  private ngZone: NgZone) { }
+  constructor(private adService: AdService) {
+  }
   
   ngOnInit() {
-    this.adService.observableList.subscribe(adList => {
-      this.ngZone.run(() => {
-        this.adList = adList;
-        console.log(this.adList);
-      });
-      
-    });
+   this.adList = this.adService.observableList;
   }
-
 }

@@ -1,9 +1,13 @@
 <div class="map-parent-layer">
-    <div class="map-block">
+    <div class="map-bg">
     <div class="map-ad" 
     *ngFor="let ad of ads"
-     [ngStyle]="{'top': ad.coordinates.y, 'left': ad.coordinates.x}">
-        <span>{{ad.type}}</span>
+     [ngStyle]="{'top.px': ad.coordinates.y, 'left.px': ad.coordinates.x}">
+        <span>{{ad.creative.name}}</span>
+        <img *ngIf="ad.type === 'IMAGE'" [src]="ad.creative.url">
+        <div class="video-layer" *ngIf="ad.type === 'VIDEO'">
+            <video width="100%" [src]="ad.creative.url" autoplay [muted]="'muted'"></video>
+        </div>
         {{ad.coordinates.x}}, {{ad.coordinates.y}}
     </div>
     </div>

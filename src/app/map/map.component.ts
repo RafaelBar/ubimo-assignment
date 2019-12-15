@@ -1,6 +1,5 @@
-import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
-import { AdService } from '../ad.service';
-import { IAdEvent } from 'ubimo-fed-home-assigment';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { AdService, IAdEventWithTime } from '../ad.service';
 
 @Component({
   selector: 'app-map',
@@ -10,23 +9,26 @@ import { IAdEvent } from 'ubimo-fed-home-assigment';
 
 
 export class MapComponent implements OnInit {
-  ads: IAdEvent[] = [];
+  ads: IAdEventWithTime[] = [];
   
   constructor(
-    private adService: AdService,
-    private ngZone: NgZone) {
+    private adService: AdService, private ngZone: NgZone) {
   }
   
   ngOnInit() {
     this.adService.observableCurrAd.subscribe(currAdRes => {
-      this.ngZone.run(()=>{
-        console.log(currAdRes)
-        this.ads.push(currAdRes);
+      this.ngZone.run(()=> {
+        const ad: IAdEventWithTime = {
+          ...currAdRes, 
+          timestamp: new Date().getTime()
+      };
+        this.ads.push(ad);
         setTimeout(() => {
-          // todo: add uniqe id to each add and remove by id instead of pop
-          this.ads.pop();
-      }, 5000);
-    });
-  }); 
+          const index = this.ads.findIndex(i => i.timestamp === ad.timestamp);
+          this.ads.splice(index, 1);
+        }, 5000);
+      });
+    }); 
   }
+  
 }

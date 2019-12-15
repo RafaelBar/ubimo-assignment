@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./logs-filter.component.less']
 })
 export class LogsFilterComponent implements OnInit {
+  start:number;
+  end:number;
+  constructor() { 
 
-  constructor() { }
+  }
 
   ngOnInit() {
+
   }
 
 }
